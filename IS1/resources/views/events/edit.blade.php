@@ -1,46 +1,39 @@
 @extends('layout')
 
 @section('main')
-<h1>New Event</h1>
-
-<!--@if($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-    <strong> {{$message}}</strong>
-</div>
-
-
-@endif
--->
     <div class="container">
          <div class="row justify-content-center">
              <div class="col-sm-8">
                      <div class="card mt-3 p-3">
-                     <form method="POST" action="/events/store" enctype="multipart/form-data">
+                        <h3 class="text-muted"> Event Edit #{{$event ->name}}</h3>
+                        <form method="POST" action="/events/{{$event->id }}/update" enctype="multipart/form-data">
                      @csrf 
+                     
+                     @method('PUT')
                      <div class="form-group">
                          <label> Name </label> 
-                         <input type="text" name="name" class="form-control" />
+                         <input type="text" name="name" class="form-control" value="{{$event->name}}" />
                          @if($errors->has('name'))
                          <span class="text-danger">{{$errors->first('name') }}</span>
                          @endif
                      </div>
                      <div class="form-group">
                          <label> Location </label> 
-                         <input type="text" name="location" class="form-control" />
+                         <input type="text" name="location" class="form-control" value="{{$event->location}}" />
                          @if($errors->has('location'))
                          <span class="text-danger">{{$errors->first('location') }}</span>
                          @endif
                      </div>
                      <div class="form-group">
                          <label> Date </label> 
-                         <input type="text" name="date" class="form-control" />
+                         <input type="text" name="date" class="form-control" value="{{$event->date}}" />
                          @if($errors->has('date'))
                          <span class="text-danger">{{$errors->first('date') }}</span>
                          @endif
                      </div>
                      <div class="form-group">
                          <label> Description </label> 
-                         <textarea class="form-control" name="description"></textarea>
+                         <textarea class="form-control" name="description" value="{{$event->description}}"></textarea>
                          @if($errors->has('description'))
                          <span class="text-danger">{{$errors->first('description') }}</span>
                          @endif
@@ -127,4 +120,6 @@ label {
   background-color: #23272b;
 }
  </style>
+</body>
+
 @endsection

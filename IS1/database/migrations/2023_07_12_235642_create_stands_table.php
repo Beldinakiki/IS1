@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('stands', function (Blueprint $table) {
             $table->id();
-            //$table->unsignedBigInteger('stand_id')->default(0);
-            $table->string('name');
-            $table->string('location');
-            $table->string('date');
-            $table->string('description');
-            $table->string('image');
+            $table->unsignedBigInteger('eventId');
+            
+            $table->enum('size', ['small', 'medium', 'large']);
+            $table->unsignedInteger('available_quantity')->default(0);
+            $table->decimal('price', 8, 2);
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id') ->on('users');
+    
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
     }
 
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('stands');
     }
 };
