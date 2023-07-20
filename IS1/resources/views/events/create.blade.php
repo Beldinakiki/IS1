@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('main')
+
 <h1>New Event</h1>
 
 <!--@if($message = Session::get('success'))

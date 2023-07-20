@@ -9,10 +9,12 @@ class VendorController extends Controller
 {
     public function index()
     {
-
         $events = Events::all();
         return view('vendor.index', ['events'=>Events::latest()->get()],compact('events'));
 
-        
+    }
+
+    public function stands(){
+        return view('vendor.stands');
     }
 }

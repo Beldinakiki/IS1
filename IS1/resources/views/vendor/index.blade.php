@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('main')
+@section('content')
     <div class="container">
         <div class="text-right">
            
@@ -33,7 +33,7 @@
        
         
         <td>
-          <a href="#" class="btn btn-dark btn-sm">View stands</a> </td>
+          <a href="/stands" class="btn btn-dark btn-sm">View stands</a> </td>
         
       @endforeach
     </tbody>

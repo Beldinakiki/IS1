@@ -3,74 +3,64 @@
 namespace App\Http\Controllers;
 use App\Models\Events;
 use App\Models\Stand;
+use App\Models\Booking;
 
 use Illuminate\Http\Request;
 
 class StandController extends Controller
 { 
-    public function create(Request $request)
+  // StandController.php
+
+// StandController.php
+public function index()
+{
+    $stands = Stand::all(); // Retrieve all stands from the database
+    return view('stands.index', compact('stands'));
+}
+
+public function create($eventId)
+{
+    // Fetch the event from the database
+    $event = Events::findOrFail($eventId);
+
+    // Pass the $event data and $eventId variable to the view
+    return view('stands.create', compact('event', 'eventId'));
+}
+
+    
+   
+        
+    public function store(Request $request, $eventId)
     {
-        $data = $request->validate([
+       
+        $request->validate([
+            'size' => 'required',
             'size' => 'required|in:small,medium,large',
-            'quantity' => 'required|integer|between:1,100',
-            'date' => 'required|date_format:Y-m-d',
-            'eventId' => 'required|integer',
+            'quantity' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
         ]);
-        
-      
-          $stand = Stand::create($data);
-          $stand->event()->associate($request->input('eventId'));
-          $stand->save();
-      
-          if ($stand) {
-            return redirect()->route('events.stands')->with('success', 'Stand created successfully.');
-          } else {
-            return redirect()->route('stands.create')->with('error', 'An error occurred.');
-          }
-        }
-    
-    
-    
-    public function store(Request $request,$eventId ){
 
-        $event = Events::findOrFail($eventId);
-        
-            //validate data
-            $request->validate([
-                'size'=>'required',
-                'quantity'=>'required',
-                'price'=>'required',
-            ]);
+        // Create the stand
+        $stand = new Stand([
+            'type' => $request->type, 
+            'size' => $request->size,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'event_id' => $eventId,
+        ]);
 
-                        
-                $stand = new Stand();
-                $stand->type = $request->type;
-                $stand->size = $request->size;
-                $stand->price = $request->price;
-
-                $stand->save();
-
-                           
-                $stand->eventId = $event->id;
-
-               
-                $stand->save();
-
-
-                return redirect()->route('events.showstands', ['id' => $eventId])->with('success', 'Stands Added!');    
+        // Save the stand and associate it with the event
+        //$event->stands()->save($stand);
+        $stand->save();
+ 
+        return redirect()->route('stands.show', ['id' => $stand->id])->with('success', 'Stand Successfully Created!');
     }
     
     public function show($id)
     {
-
-    $event = Events::where('id', $id)->first();
-    return view('events.showstands', ['event' => $event]);
-
-
+        $stand = Stand::findOrFail($id);
+        return view('stands.show', ['stand' => $stand]);
     }
-    
    
-
-
     
 }

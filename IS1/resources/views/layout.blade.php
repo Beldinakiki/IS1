@@ -13,22 +13,20 @@
 <nav class="navbar navbar-expand-sm bg-dark">
 
 <!-- Links -->
-<ul class="navbar-nav">
-  <li class="nav-item">
+
    
 <!-- Inside your HTML element -->
-<!-- Inside your HTML element -->
-<div style="display: flex; align-items: center; justify-content: center;">
-    <div style="flex: 1;">
-        <a class="nav-link text-light" href="/events">Events</a>
-    </div>
-    <div style="text-align: center-right;">
+<div style="text-align: center-right;">
         <img src="/assets/images/blacklogo.png" alt="Logo" style="width: 200px; height: auto;" />
     </div>
 </div>
+<div style="display: flex; align-items: center; justify-content: space-between; background-color: #333;">
+    <div style="flex: 1;">
+        <a class="nav-link text-light" href="/events">Events</a>
+    </div>
 
-  
-</ul>
+
+
 
 </nav>
 
@@ -39,6 +37,6 @@
 </div>
 
 @endif
-@yield('main')
+@yield('content')
 </body>
 </html>

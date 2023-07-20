@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('main')
+@section('content')
     <div class="container">
         <div class="text-right">
             <a href="events/create" class="btn btn-dark mt-2"> New Event </a>
@@ -31,7 +31,7 @@
           <img src="events_photos/{{ $event->image}}" class="rounded-circle" width="100" height="100" />
         </td>
         <td>
-          <a href="{{ $event->id }}/stands/create" class="btn btn-dark btn-sm">Add Stands</a> </td>
+          <a href="events/{{ $event->id }}/stands/create" class="btn btn-dark btn-sm">Add Stands</a> </td>
         <td>
           <a href="events/{{ $event->id }}/edit" class="btn btn-dark btn-sm">Edit Event</a> </td>
           <td>

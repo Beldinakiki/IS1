@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Event;
+use App\Models\Events;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +11,7 @@ class Stand extends Model
 {
     use HasFactory;
     protected $table = "stands";
-    protected $fillable = ['eventId', 'type', 'size', 'available_quantity', 'price'];
+    protected $fillable = ['event_id', 'type', 'size', 'quantity', 'price'];
 
     public function event()
 {

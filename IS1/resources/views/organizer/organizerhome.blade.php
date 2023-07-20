@@ -58,7 +58,7 @@
 </div>
 
 <div class="button-container">
-    <a href="/events" class="btn btn-dark mt-2">View Your Events</a>
+    <a href="#" class="btn btn-dark mt-2">View Your Events</a>
 </div>
 
                 </div>

@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stands', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('eventId');
-            $table->enum('size', ['small', 'medium', 'large']);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('stand_id');
+            $table->string('date');
             $table->integer('quantity');
-            $table->decimal('price', 8, 2);
+            $table->decimal('down_payment', 8, 2);
             $table->timestamps();
-    
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+
+            //$table->foreignId('user_id')->references('id')->on('user')->onDelete('cascade');
+            //$table->foreignId('stand_id')->references('id')->on('stands')->onDelete('cascade');
         });
+
     }
 
     /**
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stands');
+        Schema::dropIfExists('bookings');
     }
 };
